@@ -1,8 +1,14 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+class BaseConfig:
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # отслеживает изменения в базе
+    DEBUG = False
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///order.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JSON_AS_ASCII'] = False
-db = SQLAlchemy(app)
+
+class DevConfig(BaseConfig):
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///order.db'
+    SQLALCHEMY_ECHO = True
+    JSON_AS_ASCII = False
+    DEBUG = True
+
+
+class ProdConfig(BaseConfig):
+    pass
