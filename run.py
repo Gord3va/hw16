@@ -1,16 +1,8 @@
 import os
+from app.create_app import app
 
-from app import create_app
-from config import DevConfig
-from db import db
-from models import User
+if __name__ == '__main__':
+    os.environ['FLASK_ENV'] = 'development'
+    app.run(host='0.0.0.0')
 
-
-app = create_app(config=DevConfig)
-
-@app.shell_context_processor
-def shell():
-    return {
-        "db":db,
-        "User":User,
-    }
+    

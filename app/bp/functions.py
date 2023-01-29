@@ -1,5 +1,5 @@
 import db
-from models import User, Order, Offer
+from db.models.models import User, Order, Offer
 
 import json
 from db import db
@@ -95,5 +95,3 @@ class Functions:
             return "Данные удалены"
         except Exception:
             return "Данные отсутствуют"
-
-
