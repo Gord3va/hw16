@@ -1,4 +1,4 @@
-from db import db
+from db.create_db import db
 import enum
 """представляет собой набор символических имен (членов), привязанных к уникальным значениям
 
@@ -36,7 +36,7 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     age = db.Column(db.Integer, db.CheckConstraint("age > 0"))
     email = db.Column(db.Text, nullable=False)
-    role = db.Column(db.Text, nullable=False)
+    role = db.Column(db.Enum(User_Role), nullable=False)
     phone = db.Column(db.Integer, nullable=False)
 
     customers = db.relationship('Order', foreign_keys='Order.customer_id', cascade='all, delete')
@@ -133,5 +133,5 @@ class Offer(db.Model):
             "order_id": self.order_id,
             "executor_id": self.executor_id,
             'order_info': self.orders_constraint.t_dict(),
-            'executor_info': self.customer_constraint.t_dict(),
+            'executor_info': self.executor_constraint.t_dict(),
         }
